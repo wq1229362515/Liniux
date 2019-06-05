@@ -2,7 +2,7 @@
 #include<unistd.h>
 
 
-int main (){
+int main (int  argc, char *argv[],char *env[]){
 
     //替换函数 
 	//调用exec并不创建进程,所以调用execl后程序进程id并没有发生改变
@@ -30,16 +30,28 @@ int main (){
 	argv[2] = "-a";*/
 	//不需要再后面加上NULL,还有给出指数组名即可
 	//execv("/usr/bin/ls",argv);
-	
-	
-	
 	//带e和不带e的区别就是要运行的函数是否重新定义环境变量我们上面的五个默认的char *const argv[]是NULL
 	//不需要重新定义环境变量,而且以上的的都是函数 在man3 中定义 
 	//这个execve 是系统调用接口,直接和内核打交道
 	//int execve(char *path ,char *const argv[],char *const envp[]);
+	//第一个参数是路径,第二个参数是指定参数所以我们在最后要输入NULL作为结尾,第三个是环境变量
+	//
+	//
+	//在这里运行了LS程序,将env给出的是NULL
+	//int ret = execle("/usr/bin/ls","ls","-a","-l",NULL,NULL);
+	//exec函数只有出错时候有返回值,而没有成功返回值
+	//
+	
+	//运行的是我们自己写的程序
+	//execle("./envi","ls","-a","-l",NULL,NULL);
+	
+	//运行加载了自己的环境变量
+	//也就是说带e和不带e的区别就是要运行的程序是否需要重新定义环境变量(NULL表示默认的环境变量)
+	execle("./envi","ls","-a",NULL,env);
 	printf("这是一个程序替换范例\n");
 
-
+	// 环境变量就是系统给我们搭建了程序的工作环境,让我们可以在想要的环境下去运行
+	// 而不必在程序中繁琐的设置(我们也是可以去设置环境变量的)
 
 	return 0;
 }
