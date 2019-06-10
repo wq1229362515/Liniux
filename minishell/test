@@ -1,0 +1,11 @@
+总用量 52
+drwxrwxr-x.  3 jinriqinnian jinriqinnian  4096 6月  10 17:59 .
+drwxrwxr-x. 17 jinriqinnian jinriqinnian   230 6月  10 17:12 ..
+-rw-rw-r--.  1 jinriqinnian jinriqinnian   100 6月  10 17:37 makefile
+-rwxrwxr-x.  1 jinriqinnian jinriqinnian 13192 6月   5 13:51 minishell
+-rw-rw-r--.  1 jinriqinnian jinriqinnian  2130 6月  10 15:55 minishell.c
+drwxrwxr-x.  2 jinriqinnian jinriqinnian    72 6月  10 17:42 Rmini
+-rwxrwxr-x.  1 jinriqinnian jinriqinnian 13208 6月  10 17:47 Rminishell
+-rw-rw-r--.  1 jinriqinnian jinriqinnian  2144 6月  10 17:47 Rminishell.c
+-rw-rw-r--.  1 jinriqinnian jinriqinnian     0 6月  10 18:00 test
+---------x.  1 jinriqinnian jinriqinnian     0 6月  10 16:59  test.txt
