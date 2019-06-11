@@ -17,7 +17,7 @@ int main (){
         // ls -l >> text.txt
         int flag = 0;               // 文件标志位
         char  *file_name = NULL;           //重定向文件名字记录
-        while(*ptr != '\0') {
+        while(*ptr) {
             //记录 >  符号的多少
             if(*ptr == '>'){
                 *ptr = '\0';
@@ -60,18 +60,23 @@ int main (){
 			chdir(argv[1]);
 			continue;
 		}
+        umask(0);
         int pid = fork();
-        if(pid == 0){
+        if(pid < 0 ){
+            perror("fork error");
+        }
+        else if(pid == 0){
             int fd  = 1; //文件描述符
             if(flag == 1 ){
                 fd = open(file_name,O_CREAT|O_WRONLY|O_TRUNC,0664);
             }
             else if(flag == 2 ){
-                fd = open(file_name,O_CREAT,O_WRONLY,O_APPEND,0664);
+                fd = open(file_name,O_CREAT|O_WRONLY|O_APPEND,0664);
             }
             dup2(fd,1);
             //最后将argv最后一个赋值NULL了
             execvp(argv[0],argv);
+            close(fd);
             //如果替换程序失败那么直接退出
             exit(0);
 		}
