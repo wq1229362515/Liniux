@@ -1,4 +1,3 @@
-twait:twait.c
+cond:cond.c
 	gcc $^ -o $@ -lpthread
-thread:thread.c
-	gcc $^ -o $@ -lpthread
+
