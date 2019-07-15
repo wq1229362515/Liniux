@@ -1,0 +1,76 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AR	Makefile	/^AR=ar  $/;"	m
+CC	Makefile	/^CC=gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS=-o$/;"	m
+CROSS_COMPILE	Makefile	/^CROSS_COMPILE=arm-arago-linux-gnueabi-$/;"	m
+INCLUDE	Makefile	/^INCLUDE=include.h rs232.h$/;"	m
+LDFLAGS	Makefile	/^LDFLAGS=-L.\/ -lpthread  $/;"	m
+LED1OFF	main.c	8;"	d	file:
+LED1ON	main.c	3;"	d	file:
+LED2OFF	main.c	9;"	d	file:
+LED2ON	main.c	4;"	d	file:
+LED3OFF	main.c	10;"	d	file:
+LED3ON	main.c	5;"	d	file:
+LED4OFF	main.c	11;"	d	file:
+LED4ON	main.c	6;"	d	file:
+LEDALLOFF	main.c	12;"	d	file:
+LEDALLON	main.c	7;"	d	file:
+RS232_RECV_CMD_HEAD	rs232.h	44;"	d
+SRC	Makefile	/^SRC=main.c rs232.a$/;"	m
+TARGET	Makefile	/^TARGET:=led_app$/;"	m
+__INCLUDE_H_	include.h	2;"	d
+__RS232_H_	rs232.h	2;"	d
+_tag_r_cmd	rs232.h	/^typedef struct _tag_r_cmd {$/;"	s
+_tag_rs232	rs232.h	/^typedef struct _tag_rs232 {$/;"	s
+_tag_rs232_attr	rs232.h	/^typedef struct _tag_rs232_attr {$/;"	s
+attr	rs232.h	/^	tag_rs232_attr attr;$/;"	m	struct:_tag_rs232
+baudrate	rs232.h	/^	int   baudrate;		\/\/baudrate$/;"	m	struct:_tag_rs232_attr
+cmd	rs232.h	/^	unsigned char cmd;$/;"	m	struct:_tag_r_cmd
+convbaud	rs232.c	/^static int convbaud(unsigned long int baudrate)$/;"	f	file:
+csum	rs232.h	/^	unsigned char csum;		\/\/l, ctrl, cmd, data$/;"	m	struct:_tag_r_cmd
+ctrl	rs232.h	/^	unsigned char ctrl;$/;"	m	struct:_tag_r_cmd
+cxor	rs232.h	/^	unsigned char cxor;		\/\/l, ctrl, cmd, data$/;"	m	struct:_tag_r_cmd
+data_ctrl0	rs232.h	/^	unsigned char data_ctrl0;$/;"	m	struct:_tag_r_cmd
+data_ctrl1	rs232.h	/^	unsigned char data_ctrl1;$/;"	m	struct:_tag_r_cmd
+data_ctrl2	rs232.h	/^	unsigned char data_ctrl2;$/;"	m	struct:_tag_r_cmd
+databit	rs232.h	/^	char  databit;		\/\/data bits, 5, 6, 7, 8$/;"	m	struct:_tag_rs232_attr
+debug	rs232.h	/^	char  debug;		\/\/debug mode, 0: none, 1: debug$/;"	m	struct:_tag_rs232_attr
+destroy_rs232	rs232.c	/^void destroy_rs232(tag_rs232 *m_this)$/;"	f
+dst_addr0	rs232.h	/^	unsigned char dst_addr0;$/;"	m	struct:_tag_r_cmd
+dst_addr1	rs232.h	/^	unsigned char dst_addr1;$/;"	m	struct:_tag_r_cmd
+dst_addr2	rs232.h	/^	unsigned char dst_addr2;$/;"	m	struct:_tag_r_cmd
+dst_addr3	rs232.h	/^	unsigned char dst_addr3;$/;"	m	struct:_tag_r_cmd
+dst_addr4	rs232.h	/^	unsigned char dst_addr4;$/;"	m	struct:_tag_r_cmd
+dst_addr5	rs232.h	/^	unsigned char dst_addr5;$/;"	m	struct:_tag_r_cmd
+echo	rs232.h	/^	char  echo;			\/\/echo mode, 0: none, 1: echo$/;"	m	struct:_tag_rs232_attr
+fctl	rs232.h	/^	char  fctl;			\/\/flow control, 0: none, 1: hardware, 2: software$/;"	m	struct:_tag_rs232_attr
+fd	main.c	/^int fd[4] = {0};$/;"	v
+fd	rs232.h	/^	int fd;$/;"	m	struct:_tag_rs232
+head	rs232.h	/^	unsigned char head;     \/\/0x79$/;"	m	struct:_tag_r_cmd
+led_ctrl	main.c	/^void led_ctrl(int led)$/;"	f
+led_init	main.c	/^int led_init()$/;"	f
+len_h	rs232.h	/^	unsigned char len_h;	\/\/low length of data$/;"	m	struct:_tag_r_cmd
+len_l	rs232.h	/^	unsigned char len_l;	\/\/high length of data$/;"	m	struct:_tag_r_cmd
+main	main.c	/^int main(int argc, const char *argv[])$/;"	f
+parity	rs232.h	/^	char  parity;		\/\/parity 0: none, 1: odd, 2: even$/;"	m	struct:_tag_rs232_attr
+prompt	rs232.h	/^	char  prompt;		\/\/prompt after reciving data$/;"	m	struct:_tag_rs232_attr
+reserved	rs232.h	/^	int   reserved;		\/\/reserved, must be zero$/;"	m	struct:_tag_rs232_attr
+rs232_init	rs232.c	/^extern int rs232_init(const char *m_devname, $/;"	f
+rs232_r_thread	rs232.c	/^static void *rs232_r_thread(void *arg)$/;"	f	file:
+rs232_recv_callback_t	rs232.h	/^typedef int (*rs232_recv_callback_t)(struct _tag_rs232* m_this, void *data);$/;"	t
+rs232_set_attr	rs232.c	/^static int rs232_set_attr(int fd, tag_rs232_attr* m_pattr)$/;"	f	file:
+status	rs232.h	/^	int * status;$/;"	m	struct:_tag_rs232
+stopbit	rs232.h	/^	char  stopbit;		\/\/stop bits, 1, 2$/;"	m	struct:_tag_rs232_attr
+tag_r_cmd	rs232.h	/^}tag_r_cmd;$/;"	t	typeref:struct:_tag_r_cmd
+tag_rs232	rs232.h	/^} tag_rs232;$/;"	t	typeref:struct:_tag_rs232
+tag_rs232_attr	rs232.h	/^} tag_rs232_attr;$/;"	t	typeref:struct:_tag_rs232_attr
+th	rs232.h	/^	pthread_t th;$/;"	m	struct:_tag_rs232
+thread_running	rs232.h	/^	int thread_running;$/;"	m	struct:_tag_rs232
+usr_data	rs232.h	/^	unsigned char usr_data;$/;"	m	struct:_tag_r_cmd
+usr_data_len_h	rs232.h	/^	unsigned char usr_data_len_h;$/;"	m	struct:_tag_r_cmd
+usr_data_len_l	rs232.h	/^	unsigned char usr_data_len_l;$/;"	m	struct:_tag_r_cmd
