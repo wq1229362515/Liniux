@@ -75,6 +75,23 @@ int protocol  (采取什么协议来传输,默认是0,系统会自动推演)
 //                        struct sockaddr *src_addr, socklen_t *addrlen);
 //                       //源IP地址 
 //5.关闭套接字文件 close(fd);
+/*
+ *
+ *
+ * netstat 是查看网络状态的重要的工具
+ * n拒绝显示别名
+ * l仅列出仅在监听的服务状态
+ * t(tcp) 相关选项
+ * u(udp) 仅仅显示udp相关选项
+ * a(all)显示所有的选项
+ * p 显示建立相关链接的程序名
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
 #define CHECK(q) {if((q) == false ) return -1;}
 class UdpSocket{
 
@@ -97,9 +114,10 @@ class UdpSocket{
         bool Bind(const string& ip,const uint16_t port){
             struct sockaddr_in addr;
             addr.sin_family = AF_INET;
-            //将端口
-            addr.sin_port = htons(9000);
+            //将端口在传输的时候,将主机字节序转换为网络字节序
+            addr.sin_port = htons(port);
             //cout<<port<<endl;
+            //将ip地址也就是string类型的转换为IP地址
             addr.sin_addr.s_addr = inet_addr(ip.c_str());
             socklen_t len = sizeof(struct sockaddr_in);
             int ret = bind(fd_,(struct sockaddr*)&addr,len);
@@ -112,7 +130,7 @@ class UdpSocket{
         bool Send(const string &data,const string& ip,const uint16_t port){
             struct sockaddr_in addr;
             addr.sin_family = AF_INET;
-            //将IP地址转换为点分十进制
+            //将点分十进制IP地址转换为IP地址
             addr.sin_addr.s_addr = inet_addr(ip.c_str());
             addr.sin_port = htons(port); 
             socklen_t len = sizeof(struct sockaddr_in);
@@ -143,8 +161,13 @@ class UdpSocket{
                 return false;
             }
             //将接受到的缓存数据放入缓存中去
-            //将十进制点分转换为string
+            //将IP地址转换为string点分十进制
             ip = inet_ntoa(addr.sin_addr);
+            //网络字节序转换为主机字节序
+            //htons(port)
+            //n代表network
+            //h代表host
+            //s代表16位短整形
             port = ntohs(addr.sin_port);
             buf.assign(temp,ret);
             cout<<"recv byte:"<<buf.size()<<endl;
