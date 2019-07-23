@@ -70,7 +70,7 @@ class TcpSocket {
             }
             return true;
         }
-        //将服务器发送连接请求
+        //向服务器发送连接请求
         bool Connect(const string &srv_ip, 
                 const uint16_t &srv_port) {
             struct sockaddr_in addr;
@@ -82,25 +82,25 @@ class TcpSocket {
             if (ret < 0) {
                 cerr << "connect error\n";
                 return false;
-
             }
             return true;
         }
         //监听到有数据发送,就可以进行进行接收,并创建另外的套接字了,最早的套接字就是门迎套接字
         //
-        bool Accept(const string _ip,uint16_t _port){
+        //
+        void Getnewfd(int newfd){
+            _fd = newfd;
+        }
+        bool Accept(TcpSocket &clisock){
             // newfd = int accept(int s, struct sockaddr *addr, socklen_t *addrlen);
             struct sockaddr_in addr;
-            addr.sin_family = AF_INET;
-            addr.sin_port = htons(_port);
-            addr.sin_addr.s_addr = inet_addr(_ip.c_str());
             socklen_t len   = sizeof(struct sockaddr_in);
             int newfd = accept(_fd,(struct sockaddr*)&addr,&len);
             if( newfd < 0 ){
                 cerr<<"Socket accept error "<<endl;
                 return false ;
             }
-            _fd = newfd;     
+            clisock.Getnewfd(newfd);     
             return true;
         }
         bool Send(string& data){
@@ -119,7 +119,7 @@ class TcpSocket {
             //ssize_t recv(int sockfd, void *buf, size_t len, int flags);
             //flag = 0 ; 默认的是阻塞等待
             char temp[4096] = {0};
-            ssize_t ret = (_fd,temp,4096,0);
+            ssize_t ret =recv(_fd,temp,4096,0);
             if(ret < 0){
                 cerr<<"Recv error "<<endl;
                 return false;

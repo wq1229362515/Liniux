@@ -1,4 +1,8 @@
-all:Tcli Tsrv 
+all:Tcli Tsrv processTsrv threadTsrv
+threadTsrv:threadTsrv.cpp
+	g++ $^ -o $@ -lpthread
+processTsrv:processTsrv.cpp
+	g++ $^ -o $@
 Tcli:Tcli.cpp
 	g++ $^ -o $@
 Tsrv:Tsrv.cpp
