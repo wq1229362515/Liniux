@@ -1,9 +1,11 @@
 
 //线程的同步 :线程的时序合理性  
-//等待 +  唤醒 
+//等待 +  唤醒 +等待队列 
 //
-//如果现在不合适操作就等待
-//如果合适操作了就唤醒操作
+//对于线程来说,我们假设要实现某一个动作需要一个前提条件,我们去面馆前提得有一碗面
+// 那么如果现在不合适操作(没有面)就等待
+//如果满足条件(有面)操作了就唤醒操作
+//如果不满足条件我们就需要执行等待操作
 //
 //条件变量实现同步 等待+唤醒+等待队列
 //条件变量只是提供了这些功能,但是具体什么时候等待(线程)什么时候唤醒,需要用户自身来判断
@@ -23,6 +25,7 @@
 //2.初始化
 //3.条件变量提供等待功能 pthread_cond_init(&cond,&mutex)/pthread_cond_timedwait()
 //  为什么要和互斥锁一起使用?
+//      因为操作临界资源了之后,假如我们的条件没有成立,那么就要加载到等待队列里面,条件变量的条件等待实现了三步操作,解锁,等待,被唤醒重新加锁
 //      线程等待那么就要有等待的条件,所以就要访问临界资源,要处理数据,就要进行判断??
 //      这时候访问临界资源了,就要和互斥锁一起使用了,临界资源操作需要受保护(互斥锁,这是默认的)
 //
@@ -53,7 +56,8 @@ void *eat_noodle(void *arg){
         //有面才能吃面,没有面
         //临界资源操作 加锁
         pthread_mutex_lock(&mutex);
-        if(noodle == 0){
+        //while(noodle == 0){
+        while(noodle == 0){
             //continue 没有休眠CPU占用率非常高,为了等待耗费cpu不划算
             //所以休眠
             //top查看CPU资源
@@ -90,7 +94,9 @@ void *eat_noodle(void *arg){
             pthread_mutex_lock(&mutex);*/
             //被唤醒加锁吃面
 
-            pthread_cond_wait(&cond_eat,&mutex);    //集合了三步操作
+            //这个操作是一个阻塞操作
+            //k:
+            pthread_cond_wait(&cond_eat,&mutex);    //集合了三步操作 解锁 + 等待队列 + 加锁
             
         }
         //能走下来说明有面了 noodle == 1;
@@ -150,7 +156,7 @@ int  main(){
     pthread_cond_init(&cond_cook,NULL);
 
     int i;
-    for(i = 0;i<1;i++){
+    for(i = 0;i<3;i++){
         int ret = pthread_create(&tid1,NULL,eat_noodle,NULL);
         if(ret != 0 ){
             printf("pthread creat error!\n");

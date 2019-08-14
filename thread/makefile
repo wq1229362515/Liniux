@@ -1,3 +1,3 @@
-p_c_sample:p_c_sample.cpp
+posix:posix.cpp
 	g++ $^ -o $@ -lpthread
 

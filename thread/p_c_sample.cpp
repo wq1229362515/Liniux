@@ -36,6 +36,7 @@
 #include<iostream>
 #include<queue>
 #include<pthread.h>
+#include<unistd.h>
 
 using namespace std;
 
@@ -62,7 +63,6 @@ class BlockQueue{
         pthread_mutex_destroy(&mutex);
         pthread_cond_destroy(&cond_product);
         pthread_cond_destroy(&cond_consumer);
-
     }
     //入队是生产者进行入队操作,生产者将数据放入仓库
     bool pushData(int data){
@@ -78,7 +78,7 @@ class BlockQueue{
         pthread_mutex_unlock(&mutex);
     }
     //  线程出队
-        bool popData(int &data){
+    bool popData(int &data){
         pthread_mutex_lock(&mutex);
         //队列为0的话说明是没有数据的,那么就要生产者来产生数据 
         while(_queue.empty()){

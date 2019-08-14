@@ -19,6 +19,7 @@
 //发起.
 void*  Test(void * arg){
     printf("tid :%p\n",pthread_self());
+    pthread_detach(pthread_self());
     while(1){
         printf("i am thread\n");
         sleep(1);
@@ -54,6 +55,11 @@ int main (){
             perror("thread error");
         }
         */
+    sleep(1);
+    if(pthread_join(tid,NULL) == 0)
+        printf("pthread_join success\n");
+    else 
+        printf("pthread_join failed\n");
     if(ret != 0){
         fprintf(stderr,"pthread_creat:%s\n",strerror(ret));
         exit(EXIT_FAILURE);
