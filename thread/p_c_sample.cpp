@@ -124,14 +124,14 @@ int  main() {
     BlockQueue q;
     int i;
     for(i = 0;i<4;i++){
-        int ret = pthread_create(&con_tid[i],NULL,F_con,(void*)&q);
+        int ret = pthread_create(&con_tid[i],NULL,F_con,(void *)&q);
         if(ret != 0){
             cout<<"thread create error"<<endl;
             return -1;
         }
     }
     for(i = 0;i<4;i++){
-        int ret = pthread_create(&pro_tid[i],NULL,F_pro,(void*)&q);
+        int ret = pthread_create(&pro_tid[i],NULL,F_pro,(void *)&q);
         if(ret != 0){
             cout<<"thread create error"<<endl;
             return -1;
