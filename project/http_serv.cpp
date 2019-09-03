@@ -6,7 +6,6 @@ using namespace httplib;
 namespace bf = boost::filesystem;
 #define SHARE_PATH "Download"       //共享的目录
 class P2PServer {
-
     private:
         Server _server;
 
@@ -45,8 +44,16 @@ class P2PServer {
             bf::path path (req.path);
             std::stringstream name;
             name << SHARE_PATH <<"/"<< path.filename().string();
+            if(!bf::exists(name.str())) {
+                rsp.status = 404;
+                return;
+            }
+            if(bf::is_directory(name.str())) {
+                rsp.status = 403;
+                return;
+            }
             std:: ifstream file(name.str(),std::ios::binary); 
-            if(!file.is_open())  {
+            if(!file.is_open()) {
                 std::cerr<<"open file"<<name.str()<<"failed\n";
                 rsp.status = 404;
                 return;
