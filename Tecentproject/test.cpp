@@ -19,7 +19,7 @@ void Hello (const Request &req, Response &rsp) {
 void Hi(const Request &req, Response &rsp) {
 
     rsp.status = 200;
-    rsp.set_content("hello","text/html");
+    rsp.set_content("./text.html","text/html");
     return ;
 }
 
@@ -30,6 +30,7 @@ int main () {
 
     //设置静态资源目录
     server.set_base_dir("resource");
+    server.set_base_dir("./text.html");
 
 
 
