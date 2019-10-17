@@ -11,6 +11,7 @@
 #include<stdio.h>
 #include<pthread.h> //Linux中不提供线程的控制调用接口
 #include<stdlib.h>
+#include<unistd.h>
 
 //使用库函数创建的线程称为用户态线程,这个用户态线程在内核中使用一个轻量级进程实现调度
 
@@ -33,6 +34,13 @@ void*  Test(void * arg){
         }*/
     }
 }
+void* Test2(void *arg) {
+
+    while(1) {
+        printf("i am thread2\n");
+        sleep(1);
+    }
+}
 int main (){
     //一 . 线程的创建
     //man 3  库函数调用手册
@@ -45,9 +53,10 @@ int main (){
     //返回值 成功返回0 ,失败返回错误码
     //pthread 函数不会设置全局变量error 所以通过的是返回值来判断
     
-    pthread_t tid;
+    pthread_t tid,tid2;
     int ret;
     ret = pthread_create (&tid,NULL,Test,NULL);
+    int ret2 = pthread_create(&tid2,NULL,Test2,NULL);
     //如果在这里写的话就终止了主线程
     /*
     ret = pthread_cancel(pthread_self());
@@ -61,7 +70,6 @@ int main (){
     else 
         printf("pthread_join failed\n");
     if(ret != 0){
-        fprintf(stderr,"pthread_creat:%s\n",strerror(ret));
         exit(EXIT_FAILURE);
     }
     //线程ID代表的是线程在虚拟空间中的地址
